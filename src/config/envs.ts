@@ -10,5 +10,5 @@ export function createEnvs() {
         : '.env';
 
   const currentEnvs = dotenv.config({ path });
-  return dotenvExpand.expand(currentEnvs);
+  dotenvExpand.expand(currentEnvs);
 }

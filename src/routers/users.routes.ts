@@ -1,15 +1,9 @@
 import { prisma } from "@/config";
+import { createUser } from "@/controllers/users.controllers";
 import { Router } from "express";
 
 
 const router = Router()
-router.get('/users', async (_req, res) => { 
-    try {
-        const users = await prisma.user.findMany()
-        console.log(users)
-        return res.send(users)
-    } catch (error) {
-        res.send(error.message)
-    }
- })
-export {router as UsersRouter}
+router.get('/users', async (_req, res) => res.send(await prisma.user.findMany()));
+router.post('/users', createUser)
+export { router as UsersRouter }

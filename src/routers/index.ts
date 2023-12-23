@@ -1,2 +1,2 @@
-export * from './payments.routes';
-export * from './users.routes'
+export { paymentsRouter } from './payments.routes';
+export { UsersRouter } from './users.routes'

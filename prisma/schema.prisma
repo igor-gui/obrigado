@@ -21,11 +21,12 @@ model User {
 }
 
 model Transaction {
-  id         Int  @id @default(autoincrement())
+  id         Int   @id @default(autoincrement())
   gaverId    Int
   receiverId Int
-  gaver      User @relation("Gaver", fields: [gaverId], references: [id])
-  receiver   User @relation("Receiver", fields: [receiverId], references: [id])
-  value       Float @db.DoublePrecision()
+  value      Float
+  gaver      User  @relation("Gaver", fields: [gaverId], references: [id])
+  receiver   User  @relation("Receiver", fields: [receiverId], references: [id])
+
   @@unique([gaverId, receiverId])
 }

@@ -22,3 +22,9 @@ export async function getUserByNick(nickName: string){
         }
     })
 }
+
+export async function getUserById(id: number) {
+    return await prisma.user.findUnique({
+        where: { id }
+    })
+}

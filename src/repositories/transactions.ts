@@ -1,4 +1,5 @@
 import { prisma } from "@/config";
+import { getUserById } from "./users";
 
 export async function exchange({ receiverId, gaverId, value }:
     { receiverId: number, gaverId: number, value: number }) {
@@ -31,10 +32,4 @@ export async function sendBalance(id: number, value: number) {
             balance: (receiver.balance + value),
         }
     })
-}
-
-export async function getUserById(id: number) {
-    return await prisma.user.findUnique({
-        where: { id }
-    })
-}
+};

@@ -14,6 +14,8 @@ model User {
   id                     Int           @id @default(autoincrement())
   nickName               String        @db.VarChar(255)
   balance                Float         @default(0)
+  email                  String        @db.VarChar(255)
+  password               String        @db.VarChar(255)
   transactionsAsGaver    Transaction[] @relation("Gaver")
   transactionsAsReceiver Transaction[] @relation("Receiver")
 
@@ -21,11 +23,12 @@ model User {
 }
 
 model Transaction {
-  id         Int  @id @default(autoincrement())
+  id         Int   @id @default(autoincrement())
   gaverId    Int
   receiverId Int
-  gaver      User @relation("Gaver", fields: [gaverId], references: [id])
-  receiver   User @relation("Receiver", fields: [receiverId], references: [id])
-  value       Float @db.DoublePrecision()
+  gaver      User  @relation("Gaver", fields: [gaverId], references: [id])
+  receiver   User  @relation("Receiver", fields: [receiverId], references: [id])
+  value      Float @db.DoublePrecision()
+
   @@unique([gaverId, receiverId])
 }

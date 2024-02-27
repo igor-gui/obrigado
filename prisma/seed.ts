@@ -7,7 +7,9 @@ async function main() {
         for (let i = 0; i < 9; i++) {
             prisma.user.create({
                 data: {
-                    nickName: faker.person.jobTitle()
+                    nickName: faker.person.jobTitle(),
+                    email: faker.internet.email(),
+                    password: faker.internet.password()
                 }
             })
         }

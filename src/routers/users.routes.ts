@@ -1,5 +1,7 @@
 import { prisma } from "@/config";
 import { createNewUser } from "@/controllers/users.controllers";
+import { validateSchema } from "@/middlewares";
+import { userSchema } from "@/schemas";
 import { Router } from "express";
 
 
@@ -14,6 +16,6 @@ router.get('/users', async (_req, res) => {
     }
 });
 
-router.post('/users', createNewUser)
+router.post('/users', validateSchema(userSchema), createNewUser);
 
 export { router as usersRouter }

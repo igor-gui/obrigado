@@ -15,3 +15,8 @@ export type AplicationError = {
     message: string,
     status: number
 }
+
+export type CreateSessionParams = {
+    email: string,
+    password: string
+}

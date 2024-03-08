@@ -16,19 +16,30 @@ model User {
   balance                Float         @default(0)
   email                  String        @db.VarChar(255)
   password               String        @db.VarChar(255)
+  createdAt              DateTime      @default(now()) @db.Timestamp()
   transactionsAsGaver    Transaction[] @relation("Gaver")
   transactionsAsReceiver Transaction[] @relation("Receiver")
+  Session                Session[]
 
   @@unique([nickName])
 }
 
+model Session {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  User      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @db.Timestamp()
+  token     String   @db.VarChar(36)
+}
+
 model Transaction {
-  id         Int   @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   gaverId    Int
   receiverId Int
-  gaver      User  @relation("Gaver", fields: [gaverId], references: [id])
-  receiver   User  @relation("Receiver", fields: [receiverId], references: [id])
-  value      Float @db.DoublePrecision()
+  gaver      User     @relation("Gaver", fields: [gaverId], references: [id])
+  receiver   User     @relation("Receiver", fields: [receiverId], references: [id])
+  value      Float    @db.DoublePrecision()
+  createdAt  DateTime @default(now()) @db.Timestamp()
 
   @@unique([gaverId, receiverId])
 }

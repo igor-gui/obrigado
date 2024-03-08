@@ -25,5 +25,5 @@ async function checkUser(user: CreateUserParams) {
 
 async function encryptPassword(pass: string) {
 
-    return bcrypt.hash(pass, 10);
+    return bcrypt.hashSync(pass, 10);
 };

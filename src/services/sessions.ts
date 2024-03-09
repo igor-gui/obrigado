@@ -16,4 +16,4 @@ async function checkPassword({ email, password }: CreateSessionParams) {
         return
     }
     throw invalidCredentials();
-}
+};

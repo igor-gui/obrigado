@@ -30,6 +30,8 @@ model Session {
   User      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now()) @db.Timestamp()
   token     String   @db.VarChar(36)
+
+  @@unique([token])
 }
 
 model Transaction {

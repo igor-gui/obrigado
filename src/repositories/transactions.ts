@@ -1,9 +1,9 @@
 import { prisma } from "@/config";
 import { getUserById } from "./users";
+import { CreatePaymentParams } from "@/types";
 
-export async function exchange({ receiverId, gaverId, value }:
-    { receiverId: number, gaverId: number, value: number }) {
-
+export async function exchange(payment: CreatePaymentParams) {
+    const { receiverId, gaverId, value } = payment;
     withdrawBalance(gaverId, value);
     sendBalance(receiverId, value);
     return await prisma.transaction.create({ data: { gaverId, receiverId, value } })

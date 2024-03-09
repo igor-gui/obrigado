@@ -1,7 +1,15 @@
-export type PaymentParams = {
+export type CreatePaymentParams = {
+    
     gaverId: number,
     receiverId: number,
     value: number,
+}
+
+export type PaymentParams = {
+    receiverNick: string,
+    receiverEmail: string,
+    authorization: string,
+    value: number
 }
 
 export type CreateUserParams = {

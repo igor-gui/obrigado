@@ -3,11 +3,14 @@ import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 
 export async function paymentsProcess(req: Request, res: Response, next: NextFunction) {
-    const { body } = req;
-    try {
-      const payment =  await sendMoney(body);
-      return res.send(payment);
-    } catch (err) {
-        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-    }
+  const { body, headers } = req;
+  const transactionDocument = { ...body, authorization: headers.authorization };
+  try {
+    const payment = await sendMoney(transactionDocument);
+    return res.send(payment);
+  } catch (err) {
+    const ERROR_DEV_MESSAGE =`ERROR MESSAGE: ${err.message}`;
+    console.log(ERROR_DEV_MESSAGE)
+    next(err)
+  }
 }

@@ -13,3 +13,22 @@ export async function createSession({ email }: CreateSessionParams) {
         }
     });
 };
+
+export async function getUserByAuthorization(authorization: string) {
+    const { User } = await getSessionByAuthorization(authorization);
+
+    return User;
+};
+
+export async function getSessionByAuthorization(authorization: string) {
+    const token = authorization.replace("Bearer ", "");
+
+    return await prisma.session.findUnique({
+        where: {
+            token,
+        },
+        include: {
+            User: true,
+        }
+    })
+}

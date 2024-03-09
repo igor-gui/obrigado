@@ -1,6 +1,6 @@
 import { startSession } from "@/controllers/sessions.controller";
 import { validateSchema } from "@/middlewares";
-import { sessionSchema } from "@/schemas/session.schema";
+import { sessionSchema } from "@/schemas";
 import { Router } from "express";
 
 const router = Router();

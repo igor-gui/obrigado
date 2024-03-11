@@ -43,5 +43,4 @@ model Transaction {
   value      Float    @db.DoublePrecision()
   createdAt  DateTime @default(now()) @db.Timestamp()
 
-  @@unique([gaverId, receiverId])
 }

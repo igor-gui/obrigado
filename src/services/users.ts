@@ -1,4 +1,4 @@
-import { createUser, getUserByEmail, getUserByNick } from "@/repositories";
+import { createUser, getAllUsers, getUserByEmail, getUserByNick } from "@/repositories";
 import { CreateUserParams } from "@/types";
 import * as bcrypt from "bcrypt";
 import { emailInUse, nickNameInUse } from "@/errors";
@@ -27,3 +27,7 @@ async function encryptPassword(pass: string) {
 
     return bcrypt.hashSync(pass, 10);
 };
+
+export async function getUsersData(){
+    return await getAllUsers();
+}
